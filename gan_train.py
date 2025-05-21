@@ -38,7 +38,7 @@ from scheduler import WarmupMultiStepLR
 import transforms as T
 
 # Need to use parallel in apex, torch ddp can cause bugs when computing gradient penalty
-import apex.parallel as parallel
+# import apex.parallel as parallel
 
 step = 0
 
