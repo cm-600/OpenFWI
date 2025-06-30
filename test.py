@@ -75,7 +75,7 @@ def evaluate(model, criterions, dataloader, device, k, ctx,
                 pred = model(data_noise)
             else:
                 pred = model(data)
-                df['x_' + str(batch_idx)] = pred
+                df_pred['x_' + str(batch_idx)] = pred
 
             label_pred_np = T.tonumpy_denormalize(pred, ctx['label_min'], ctx['label_max'], exp=False)
             label_pred_list.append(label_pred_np)
