@@ -29,6 +29,7 @@ from torch.utils.data.dataloader import default_collate
 import torchvision
 from torchvision.transforms import Compose
 import numpy as np
+import pandas as pd
 
 import utils
 import network
@@ -41,7 +42,8 @@ import pytorch_ssim
 def evaluate(model, criterions, dataloader, device, k, ctx,
                 vis_path, vis_batch, vis_sample, missing, std):
     model.eval()
-    
+
+    df_pred = pd.DataFrame()
     label_list, label_pred_list= [], [] # store denormalized predcition & gt in numpy 
     label_tensor, label_pred_tensor = [], [] # store normalized prediction & gt in tensor
     if missing or std:
@@ -73,6 +75,7 @@ def evaluate(model, criterions, dataloader, device, k, ctx,
                 pred = model(data_noise)
             else:
                 pred = model(data)
+                df['x_' + str(batch_idx)] = pred
 
             label_pred_np = T.tonumpy_denormalize(pred, ctx['label_min'], ctx['label_max'], exp=False)
             label_pred_list.append(label_pred_np)
@@ -88,7 +91,8 @@ def evaluate(model, criterions, dataloader, device, k, ctx,
                                 vmin=ctx['data_min'] * 0.01, vmax=ctx['data_max'] * 0.01)
             batch_idx += 1
 
-    print('test')              
+    print(df_pred.shape)
+    print(df_pred.head())
     label, label_pred = np.concatenate(label_list), np.concatenate(label_pred_list)
     label_t, pred_t = torch.cat(label_tensor), torch.cat(label_pred_tensor)
     l1 = nn.L1Loss()
