@@ -49,6 +49,8 @@ def evaluate(model, criterions, dataloader, device, k, ctx,
     if missing or std:
             data_list, data_noise_list = [], [] # store original data and noisy/muted data
 
+    print('Length dataloader:', len(dataloader))
+
     with torch.no_grad():
         batch_idx = 0
         for data, label in dataloader:
@@ -93,8 +95,9 @@ def evaluate(model, criterions, dataloader, device, k, ctx,
 
     #print(df_pred.shape)
     #print(df_pred.head())
-    print(len(label_pred_list))
-    print(label_pred_list)
+    print('Length label_pred_list:', len(label_pred_list))
+    print('Length label_pred_list[0]:', len(label_pred_list[0]))           
+    print(label_pred_list[0])
     label, label_pred = np.concatenate(label_list), np.concatenate(label_pred_list)
     label_t, pred_t = torch.cat(label_tensor), torch.cat(label_pred_tensor)
     l1 = nn.L1Loss()
