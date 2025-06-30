@@ -90,7 +90,6 @@ def evaluate(model, criterions, dataloader, device, k, ctx,
             batch_idx += 1
 
     print('Length label_pred_list:', len(label_pred_list))
-    print('Shape label_pred_list:', label_pred_list.shape)
     print('Length label_pred_list[0]:', len(label_pred_list[0]))     
     print('Shape label_pred_list[0]:', label_pred_list[0].shape)     
     print(label_pred_list[0])
