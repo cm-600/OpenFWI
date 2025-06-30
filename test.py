@@ -146,7 +146,7 @@ def main(args):
             transform_label=transform_valid_label
         )
     else:
-        dataset_valid = torch.load(args.val_anno)
+        dataset_valid = torch.load(args.val_anno, weights_only=False)
 
     print("Creating data loaders")
     valid_sampler = SequentialSampler(dataset_valid)
@@ -170,7 +170,7 @@ def main(args):
 
     if args.resume:
         print(args.resume)
-        checkpoint = torch.load(args.resume, map_location='cpu')
+        checkpoint = torch.load(args.resume, map_location='cpu', weights_only=False)
         model.load_state_dict(network.replace_legacy(checkpoint['model']))
         print('Loaded model checkpoint at Epoch {} / Step {}.'.format(checkpoint['epoch'], checkpoint['step']))
     
