@@ -88,6 +88,7 @@ def evaluate(model, criterions, dataloader, device, k, ctx,
                                 vmin=ctx['data_min'] * 0.01, vmax=ctx['data_max'] * 0.01)
             batch_idx += 1
 
+    print('test')              
     label, label_pred = np.concatenate(label_list), np.concatenate(label_pred_list)
     label_t, pred_t = torch.cat(label_tensor), torch.cat(label_pred_tensor)
     l1 = nn.L1Loss()
