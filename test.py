@@ -43,7 +43,7 @@ def evaluate(model, criterions, dataloader, device, k, ctx,
                 vis_path, vis_batch, vis_sample, missing, std):
     model.eval()
 
-    df_pred = pd.DataFrame()
+    df_pred = pd.DataFrame({'x_0' : [0]})
     label_list, label_pred_list= [], [] # store denormalized predcition & gt in numpy 
     label_tensor, label_pred_tensor = [], [] # store normalized prediction & gt in tensor
     if missing or std:
