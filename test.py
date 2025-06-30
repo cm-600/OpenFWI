@@ -93,8 +93,8 @@ def evaluate(model, criterions, dataloader, device, k, ctx,
 
     #print(df_pred.shape)
     #print(df_pred.head())
-    print(len(label_pred))
-    print(label_pred)
+    print(len(label_pred_list))
+    print(label_pred_list)
     label, label_pred = np.concatenate(label_list), np.concatenate(label_pred_list)
     label_t, pred_t = torch.cat(label_tensor), torch.cat(label_pred_tensor)
     l1 = nn.L1Loss()
